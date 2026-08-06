@@ -2,6 +2,7 @@ import {createPizzaWheel} from './pizza-wheel.js';
 import {createCart} from './cart.js';
 import {createModalManager} from './modal.js';
 import {initCheckout} from './checkout.js';
+import {SOCIAL_LINKS} from './site-config.js';
 
 const EMBERS_ENABLED=false;
 
@@ -91,7 +92,28 @@ function initialize(){
   const pizzaWheel=createPizzaWheel();
   const embers=createEmberSystem();
   const cart=createCart({pizzaWheel,modal,burst:embers.burst});
-  initCheckout({cart,modal});
+  const checkout=initCheckout({cart,modal});
+
+  document.querySelector('[data-home]').addEventListener('click',event=>{
+    event.preventDefault();
+    document.getElementById('main').focus({preventScroll:true});
+  });
+  document.querySelectorAll('[data-nav-action="delivery"]').forEach(button=>button.addEventListener('click',checkout.openDeliveryFlow));
+  document.querySelectorAll('[data-social]').forEach(link=>{
+    const url=SOCIAL_LINKS[link.dataset.social];
+    if(url){
+      link.href=url;
+      link.target='_blank';
+      link.rel='noopener noreferrer';
+      link.removeAttribute('aria-disabled');
+      link.removeAttribute('tabindex');
+      return;
+    }
+    link.removeAttribute('href');
+    link.setAttribute('aria-disabled','true');
+    link.setAttribute('tabindex','-1');
+    link.title=`${link.getAttribute('aria-label')} link pending`;
+  });
 }
 
 initialize();

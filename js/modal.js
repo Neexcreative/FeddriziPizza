@@ -50,7 +50,6 @@ export function createModalManager(){
   document.querySelectorAll('[data-close]').forEach(button=>button.onclick=close);
   cartButton.onclick=event=>{event.stopPropagation();openElement===document.getElementById('cartDD')?close():open(document.getElementById('cartDD'))};
   mobileMenuButton.onclick=event=>{event.stopPropagation();openElement===document.getElementById('mobileMenu')?close():open(document.getElementById('mobileMenu'))};
-  document.querySelectorAll('[data-mobile-nav]').forEach(link=>link.onclick=event=>{event.preventDefault();close()});
   document.getElementById('mobileAccount').onclick=()=>{setAccountTab('Profile');open(document.getElementById('loginModal'))};
   document.getElementById('loginBtn').onclick=()=>{setAccountTab('Profile');open(document.getElementById('loginModal'))};
   document.querySelectorAll('#loginTabs button').forEach(button=>button.onclick=()=>setAccountTab(button.dataset.tab));

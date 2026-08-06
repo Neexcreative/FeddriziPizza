@@ -31,12 +31,16 @@ if (/<style>|<script>([\s\S]*?)<\/script>/.test(html)) {
   errors.push('Unexpected inline CSS or application JavaScript found in index.html.');
 }
 
+if (/href\s*=\s*["']#["']/i.test(html)) errors.push('Dead href="#" navigation remains in index.html.');
+if (/href\s*=\s*["']\s*["']/i.test(html)) errors.push('Empty href navigation remains in index.html.');
+if (/javascript\s*:\s*void\s*\(\s*0\s*\)/i.test(html)) errors.push('javascript:void(0) navigation remains in index.html.');
+
 if ((html.match(/<h1\b/g) || []).length !== 1) errors.push('The document must contain exactly one H1.');
 if (!/<svg id="pizzaSvg"[^>]*aria-hidden="true"[^>]*focusable="false"/.test(html)) {
   errors.push('The decorative pizza wheel must remain hidden from assistive technology.');
 }
 
-const modules = ['app.js', 'pizza-wheel.js', 'cart.js', 'modal.js', 'checkout.js'];
+const modules = ['app.js', 'pizza-wheel.js', 'cart.js', 'modal.js', 'checkout.js', 'site-config.js'];
 for (const module of modules) {
   const moduleUrl = new URL(`../js/${module}`, import.meta.url);
   try { await readFile(moduleUrl, 'utf8'); }

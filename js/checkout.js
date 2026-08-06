@@ -43,6 +43,19 @@ export function initCheckout({cart,modal}){
     document.getElementById('eta').textContent=mode==='delivery'?'30–40 min':'15–20 min pickup';
   }
 
+  function setMode(nextMode){
+    mode=nextMode;
+    document.querySelectorAll('#cartModal .toggle button').forEach(option=>option.classList.toggle('on',option.dataset.mode===mode));
+    if(mode==='collection')clearAddressError();
+    fillOrderModal();
+  }
+
+  function openDeliveryFlow(){
+    setMode('delivery');
+    const destination=cart.getItems().length?document.getElementById('cartModal'):document.getElementById('cartDD');
+    modal.open(destination);
+  }
+
   addressInput.addEventListener('input',()=>{if(addressInput.value.trim())clearAddressError()});
 
   document.getElementById('goCart').onclick=()=>{
@@ -52,11 +65,7 @@ export function initCheckout({cart,modal}){
   };
 
   document.querySelectorAll('#cartModal .toggle button').forEach(button=>button.onclick=()=>{
-    document.querySelectorAll('#cartModal .toggle button').forEach(option=>option.classList.remove('on'));
-    button.classList.add('on');
-    mode=button.dataset.mode;
-    if(mode==='collection')clearAddressError();
-    fillOrderModal();
+    setMode(button.dataset.mode);
   });
 
   document.getElementById('toCheckout').onclick=()=>{
@@ -93,5 +102,5 @@ export function initCheckout({cart,modal}){
   });
   document.getElementById('cvc').addEventListener('input',event=>event.target.value=event.target.value.replace(/\D/g,'').slice(0,4));
 
-  return {fillOrderModal,getMode(){return mode}};
+  return {fillOrderModal,openDeliveryFlow,getMode(){return mode}};
 }

@@ -47,6 +47,8 @@
   .nav a,.nav .lk{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--text);
     text-decoration:none;opacity:.85;transition:.25s;position:relative}
   .nav a:hover,.nav .lk:hover{opacity:1;color:var(--accent-hi)}
+  .nav-action{background:none;border:0;color:var(--text)}
+  .nav .lk:disabled{opacity:.42;cursor:default;color:var(--text)}
   .nav .actions{grid-column:3;display:flex;gap:26px;align-items:center;justify-content:flex-end}
   .mobile-menu-btn,.mobile-categories{display:none}
   .mobile-menu-btn{width:44px;height:44px;border:1px solid var(--border);border-radius:50%;background:var(--panel-2);
@@ -125,6 +127,7 @@
 
   .socials{position:fixed;bottom:22px;right:clamp(18px,3vw,40px);z-index:25;display:flex;gap:15px}
   .socials a{color:var(--muted);transition:.25s}.socials a:hover{color:var(--text)}
+  .socials [aria-disabled="true"]{opacity:.45;cursor:default;pointer-events:none}
   .socials svg{width:17px;height:17px}
 
   .hint{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:20;
@@ -149,6 +152,8 @@
     padding:0 14px;border:0;border-top:1px solid var(--border);background:transparent;color:var(--text);
     text-decoration:none;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-align:left}
   .mobile-menu a::after,.mobile-menu button::after{content:'\2192';color:var(--accent-hi);font-size:16px}
+  .mobile-menu button:disabled{opacity:.45;cursor:default}
+  .mobile-menu button:disabled::after{content:'Pending';font-size:9px;letter-spacing:.12em;color:var(--muted)}
 
   /* cart dropdown */
   .cart-dd{top:66px;right:clamp(18px,3vw,40px);width:320px;border-radius:18px;padding:18px;
