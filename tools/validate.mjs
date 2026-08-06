@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
-import vm from 'node:vm';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const errors = [];
@@ -9,18 +10,32 @@ const required = [
   'name="description"',
   'id="main"',
   'id="checkoutForm"',
-  'aria-live="polite"'
+  'aria-live="polite"',
+  'href="css/main.css"',
+  'href="css/responsive.css"',
+  'type="module" src="js/app.js"'
 ];
 
 for (const marker of required) {
   if (!html.includes(marker)) errors.push(`Missing required marker: ${marker}`);
 }
 
-const script = html.match(/<script>([\s\S]*?)<\/script>/)?.[1];
-if (!script) errors.push('Inline application script was not found.');
-else {
-  try { new vm.Script(script); }
-  catch (error) { errors.push(`JavaScript syntax error: ${error.message}`); }
+if (/<style>|<script>([\s\S]*?)<\/script>/.test(html)) {
+  errors.push('Unexpected inline CSS or application JavaScript found in index.html.');
+}
+
+const modules = ['app.js', 'pizza-wheel.js', 'cart.js', 'modal.js', 'checkout.js'];
+for (const module of modules) {
+  const moduleUrl = new URL(`../js/${module}`, import.meta.url);
+  try { await readFile(moduleUrl, 'utf8'); }
+  catch { errors.push(`Missing JavaScript module: js/${module}`); continue; }
+  const result = spawnSync(process.execPath, ['--check', fileURLToPath(moduleUrl)], { encoding: 'utf8' });
+  if (result.status !== 0) errors.push(`JavaScript syntax error in js/${module}: ${result.stderr.trim()}`);
+}
+
+for (const stylesheet of ['main.css', 'responsive.css']) {
+  try { await readFile(new URL(`../css/${stylesheet}`, import.meta.url), 'utf8'); }
+  catch { errors.push(`Missing stylesheet: css/${stylesheet}`); }
 }
 
 if (errors.length) {
@@ -28,4 +43,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('Validation passed: document structure and JavaScript syntax are valid.');
+console.log('Validation passed: document structure, stylesheets and JavaScript modules are valid.');

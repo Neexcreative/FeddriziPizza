@@ -5,7 +5,7 @@
   "description": "Immersive artisan pizza ordering experience.",
   "scripts": {
     "check": "node tools/validate.mjs",
-    "start": "npx serve ."
+    "start": "node tools/serve.mjs"
   },
   "engines": {
     "node": ">=18"
