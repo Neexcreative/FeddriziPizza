@@ -1,0 +1,13 @@
+{
+  "name": "forno-artisan-pizza",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Immersive artisan pizza ordering experience.",
+  "scripts": {
+    "check": "node tools/validate.mjs",
+    "start": "npx serve ."
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
