@@ -8,6 +8,8 @@ const types={
   '.html':'text/html; charset=utf-8',
   '.css':'text/css; charset=utf-8',
   '.js':'text/javascript; charset=utf-8',
+  '.json':'application/json; charset=utf-8',
+  '.webmanifest':'application/manifest+json; charset=utf-8',
   '.webp':'image/webp',
   '.svg':'image/svg+xml'
 };
@@ -27,4 +29,4 @@ createServer(async(request,response)=>{
     response.writeHead(404,{'Content-Type':'text/plain; charset=utf-8'});
     response.end('Not found');
   }
-}).listen(port,'127.0.0.1',()=>console.log(`Forno available at http://127.0.0.1:${port}`));
+}).listen(port,'127.0.0.1',()=>console.log(`Fedrizzi Pizza available at http://127.0.0.1:${port}`));

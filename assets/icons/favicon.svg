@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Fedrizzi Pizza">
+  <rect width="64" height="64" rx="16" fill="#161514"/>
+  <path d="M17 13h34L32 54 17 13Z" fill="#ed432c"/>
+  <path d="M18.5 16h31" fill="none" stroke="#f4b45d" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="29" cy="28" r="3.5" fill="#f5d8a8"/>
+  <circle cx="38" cy="36" r="3.5" fill="#f5d8a8"/>
+  <circle cx="30" cy="42" r="3" fill="#9f201f"/>
+</svg>

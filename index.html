@@ -4,8 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#161514">
-<meta name="description" content="Explore artisan pizzas, choose your size and build your order in an immersive, handcrafted experience.">
-<title>Forno — Artisan Pizza</title>
+<meta name="description" content="Explore handcrafted artisan pizzas, choose your favourite, and build your order through the interactive online ordering experience at Fedrizzi Pizza.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Fedrizzi Pizza | Artisan Pizza &amp; Online Ordering</title>
+
+<!-- Replace empty/relative production URLs using config/metadata.json before launch. -->
+<meta property="og:title" content="Fedrizzi Pizza | Artisan Pizza &amp; Online Ordering">
+<meta property="og:description" content="Explore handcrafted artisan pizzas and build your order with the interactive Fedrizzi Pizza online ordering experience.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="" data-production-placeholder="canonical_url">
+<meta property="og:image" content="assets/images/pizzas/pepperoni.webp">
+<meta property="og:image:alt" content="Artisan pepperoni pizza from Fedrizzi Pizza">
+<meta property="og:site_name" content="Fedrizzi Pizza">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fedrizzi Pizza | Artisan Pizza &amp; Online Ordering">
+<meta name="twitter:description" content="Explore handcrafted artisan pizzas and build your order with the interactive Fedrizzi Pizza online ordering experience.">
+<meta name="twitter:image" content="assets/images/pizzas/pepperoni.webp">
+<meta name="twitter:image:alt" content="Artisan pepperoni pizza from Fedrizzi Pizza">
+
+<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,11 +32,12 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to menu</a>
+  <h1 class="sr-only">Fedrizzi Pizza — artisan pizza ordering</h1>
   <div class="oven-glow"></div>
   <canvas id="fx" aria-hidden="true"></canvas>
 
   <nav class="nav" aria-label="Primary navigation">
-    <a class="brand" href="#" aria-label="Forno home">Forno</a>
+    <a class="brand" href="#" aria-label="Fedrizzi Pizza home">Fedrizzi Pizza</a>
     <div class="links">
       <a href="#">Delivery</a>
       <a href="#">FAQ</a>
@@ -45,7 +64,7 @@
   </div>
 
   <main class="stage" id="main">
-    <h1 class="flavor-name" id="fName">Pepperoni</h1>
+    <h2 class="flavor-name" id="fName">Pepperoni</h2>
     <div class="desc" id="fDesc"></div>
     <div class="hero-action">
       <button class="add-btn" id="addPizza">Add to order</button>
@@ -70,7 +89,7 @@
   <div class="mobile-sizes" id="mobileSizes"></div>
 
   <div class="pizza-wrap">
-    <svg id="pizzaSvg" viewBox="0 0 900 900">
+    <svg id="pizzaSvg" viewBox="0 0 900 900" aria-hidden="true" focusable="false">
       <defs>
         <radialGradient id="doughG" cx="50%" cy="50%" r="52%">
           <stop offset="0%" stop-color="oklch(0.56 0.09 62)"/><stop offset="72%" stop-color="oklch(0.50 0.10 55)"/>
@@ -102,7 +121,7 @@
 
   <!-- compact mobile navigation -->
   <div class="sheet mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-labelledby="mobileMenuTitle">
-    <h3 id="mobileMenuTitle">Menu</h3>
+    <h2 id="mobileMenuTitle">Menu</h2>
     <a href="#" data-mobile-nav>Delivery</a>
     <a href="#" data-mobile-nav>FAQ</a>
     <button id="mobileAccount">Account / Login</button>
@@ -110,7 +129,7 @@
 
   <!-- cart dropdown -->
   <div class="sheet cart-dd" id="cartDD" role="dialog" aria-modal="true" aria-labelledby="cartDDTitle">
-    <h4 id="cartDDTitle">Your order</h4>
+    <h2 id="cartDDTitle">Your order</h2>
     <div id="cartItems"></div>
     <div class="cart-total"><span>Total</span><b id="ddTotal">€0.00</b></div>
     <button class="btn" id="goCart">Go to cart</button>
@@ -119,7 +138,7 @@
   <!-- cart / delivery modal -->
   <div class="sheet modal" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
     <button class="x" data-close aria-label="Close">×</button>
-    <h3 id="cartTitle">Your order</h3>
+    <h2 id="cartTitle">Your order</h2>
     <p class="sub">Review & delivery</p>
     <div class="toggle"><button class="on" data-mode="delivery">Delivery</button><button data-mode="collection">Collection</button></div>
     <div id="modalItems"></div>
@@ -137,7 +156,7 @@
   <div class="sheet modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
     <button class="x" data-close aria-label="Close">×</button>
     <form id="checkoutForm" novalidate>
-      <h3 id="checkoutTitle">Checkout</h3><p class="sub">Contact & payment</p>
+      <h2 id="checkoutTitle">Checkout</h2><p class="sub">Contact & payment</p>
       <div class="row2"><div class="field"><label for="firstName">First name</label><input id="firstName" name="firstName" autocomplete="given-name" required><small class="field-error"></small></div><div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" required><small class="field-error"></small></div></div>
       <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required><small class="field-error"></small></div>
       <div class="field"><label for="card">Card number</label><input id="card" name="card" inputmode="numeric" autocomplete="cc-number" maxlength="19" placeholder="•••• •••• •••• ••••" required><small class="field-error"></small></div>
@@ -148,7 +167,7 @@
     <div id="checkoutDone" style="display:none">
       <div class="confirm">
         <div class="ok">✓</div>
-        <h3>Order placed</h3>
+        <h2>Order placed</h2>
         <p class="num" id="orderNum"></p>
         <p class="sub" style="margin-bottom:20px">We'll have it ready shortly</p>
         <button class="btn ghost" data-close style="max-width:200px;margin:0 auto">Done</button>
@@ -159,14 +178,14 @@
   <!-- sides modal -->
   <div class="sheet modal" id="sidesModal" role="dialog" aria-modal="true" aria-labelledby="sidesTitle">
     <button class="x" data-close aria-label="Close">×</button>
-    <h3 id="sidesTitle">Drinks</h3><p class="sub">Add to your order</p>
+    <h2 id="sidesTitle">Drinks</h2><p class="sub">Add to your order</p>
     <div class="side-list" id="sidesList"></div>
   </div>
 
   <!-- login modal -->
   <div class="sheet modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="accountTitle">
     <button class="x" data-close aria-label="Close">×</button>
-    <h3 id="accountTitle">Your account</h3><p class="sub">Sign in</p>
+    <h2 id="accountTitle">Your account</h2><p class="sub">Sign in</p>
     <div class="tabs" id="loginTabs">
       <button class="on" data-tab="Profile">Profile</button>
       <button data-tab="Rewards">Rewards</button>

@@ -11,6 +11,13 @@ const required = [
   'id="main"',
   'id="checkoutForm"',
   'aria-live="polite"',
+  '<title>Fedrizzi Pizza | Artisan Pizza &amp; Online Ordering</title>',
+  'name="robots"',
+  'property="og:title"',
+  'property="og:url"',
+  'name="twitter:card"',
+  'href="assets/icons/favicon.svg"',
+  'href="site.webmanifest"',
   'href="css/main.css"',
   'href="css/responsive.css"',
   'type="module" src="js/app.js"'
@@ -22,6 +29,11 @@ for (const marker of required) {
 
 if (/<style>|<script>([\s\S]*?)<\/script>/.test(html)) {
   errors.push('Unexpected inline CSS or application JavaScript found in index.html.');
+}
+
+if ((html.match(/<h1\b/g) || []).length !== 1) errors.push('The document must contain exactly one H1.');
+if (!/<svg id="pizzaSvg"[^>]*aria-hidden="true"[^>]*focusable="false"/.test(html)) {
+  errors.push('The decorative pizza wheel must remain hidden from assistive technology.');
 }
 
 const modules = ['app.js', 'pizza-wheel.js', 'cart.js', 'modal.js', 'checkout.js'];
@@ -37,6 +49,14 @@ for (const stylesheet of ['main.css', 'responsive.css']) {
   try { await readFile(new URL(`../css/${stylesheet}`, import.meta.url), 'utf8'); }
   catch { errors.push(`Missing stylesheet: css/${stylesheet}`); }
 }
+
+for (const asset of ['../assets/icons/favicon.svg', '../site.webmanifest', '../config/metadata.json']) {
+  try { await readFile(new URL(asset, import.meta.url), 'utf8'); }
+  catch { errors.push(`Missing SEO asset: ${asset.replace('../', '')}`); }
+}
+
+try { JSON.parse(await readFile(new URL('../site.webmanifest', import.meta.url), 'utf8')); }
+catch { errors.push('site.webmanifest is not valid JSON.'); }
 
 if (errors.length) {
   console.error(errors.join('\n'));

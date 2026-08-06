@@ -1,4 +1,4 @@
-# Forno — Artisan Pizza
+# Fedrizzi Pizza — Artisan Pizza
 
 An immersive, responsive pizza-ordering prototype built with semantic HTML, CSS, SVG and vanilla JavaScript.
 

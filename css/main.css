@@ -22,6 +22,8 @@
   }
   button{font-family:inherit;cursor:pointer}
   button,a,input{font:inherit}
+  .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;
+    overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
   :focus-visible{outline:2px solid var(--accent-hi);outline-offset:4px}
   .skip-link{position:fixed;left:16px;top:-80px;z-index:100;background:var(--text);color:var(--bg-2);
     padding:10px 16px;border-radius:999px;text-decoration:none;transition:top .2s}
@@ -142,7 +144,7 @@
   .mobile-menu{top:70px;right:18px;width:min(300px,calc(100vw - 36px));border-radius:18px;padding:14px;
     transform:translateY(-10px);box-shadow:0 24px 60px oklch(0.05 0.01 40 / .6)}
   .mobile-menu.show{transform:translateY(0)}
-  .mobile-menu h3{font-family:'Bodoni Moda',serif;font-size:22px;font-weight:500;padding:5px 6px 12px}
+  .mobile-menu h2{font-family:'Bodoni Moda',serif;font-size:22px;font-weight:500;padding:5px 6px 12px}
   .mobile-menu a,.mobile-menu button{display:flex;width:100%;min-height:48px;align-items:center;justify-content:space-between;
     padding:0 14px;border:0;border-top:1px solid var(--border);background:transparent;color:var(--text);
     text-decoration:none;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-align:left}
@@ -152,7 +154,7 @@
   .cart-dd{top:66px;right:clamp(18px,3vw,40px);width:320px;border-radius:18px;padding:18px;
     transform:translateY(-10px);box-shadow:0 24px 60px oklch(0.05 0.01 40 / .6)}
   .cart-dd.show{transform:translateY(0)}
-  .cart-dd h4{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .cart-dd h2{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
   .ci{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
   .ci .ci-n{font-size:13px}.ci .ci-s{font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
   .ci .ci-p{font-family:'Bodoni Moda',serif;font-size:15px}
@@ -181,7 +183,7 @@
   .modal.show{transform:translate(-50%,-50%)}
   .modal .x{position:absolute;top:18px;right:20px;background:none;border:none;color:var(--muted);font-size:22px;line-height:1}
   .modal .x:hover{color:var(--text)}
-  .modal h3{font-family:'Bodoni Moda',serif;font-weight:500;font-size:26px;margin-bottom:4px}
+  .modal h2{font-family:'Bodoni Moda',serif;font-weight:500;font-size:26px;margin-bottom:4px}
   .modal .sub{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
   .toggle{display:flex;background:var(--panel-2);border:1px solid var(--border);border-radius:999px;padding:4px;margin-bottom:20px}
   .toggle button{flex:1;border:none;background:none;color:var(--muted);padding:11px;border-radius:999px;
