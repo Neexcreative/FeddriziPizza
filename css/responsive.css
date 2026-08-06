@@ -6,11 +6,13 @@
     .mobile-menu-btn{display:grid}
     .cart-btn{min-height:44px;padding:0 4px}
     .arrow-wrap.left{left:14px}.arrow-wrap.right{right:14px}
-    .pizza-wrap{--size:min(620px,160vw);bottom:calc(-1 * var(--size) * 0.52)}
+    .pizza-wrap{--size:min(700px,180vw);bottom:calc(-1 * var(--size) * 0.54)}
     .flavor-name{font-size:clamp(38px,11.5vw,58px);max-width:96vw}
     .stage{padding-top:clamp(104px,17vh,145px)}
     .desc{max-width:min(80vw,440px);font-size:12px}
     .mobile-sizes{display:flex !important}
+    .order-cta{top:auto;bottom:108px;left:50%;width:min(360px,calc(100vw - 32px));transform:translateX(-50%);z-index:27}
+    .order-cta:hover{transform:translateX(-50%) translateY(-2px)}
     .mobile-sizes .pill,.add-btn{min-height:44px}
     .mobile-categories{pointer-events:auto;display:flex;gap:8px;margin-top:14px;width:min(360px,calc(100vw - 32px))}
     .mobile-categories .pill{min-width:0;min-height:44px;flex:1;justify-content:center;padding:9px 10px;gap:7px}
@@ -21,7 +23,8 @@
     .cart-btn{min-height:44px}.mobile-menu{top:64px;right:14px;width:calc(100vw - 28px)}
     .flavor-name{font-size:clamp(36px,10vw,46px)}
     .cart-dd{left:14px;right:14px;top:62px;width:auto}.modal{padding:25px 20px;max-height:calc(100dvh - 28px)}
-    .row2{grid-template-columns:1fr}.socials{display:none}.hint{bottom:18px;font-size:8px}
+    .row2,.info-grid,.delivery-examples{grid-template-columns:1fr}.socials{display:none}.hint{bottom:18px;font-size:8px}
+    .info-modal{padding:25px 18px}.info-card,.info-section{padding:14px}
     .mobile-sizes{bottom:50px;width:calc(100% - 24px);justify-content:center}.mobile-sizes .pill{padding:8px 10px;flex:1;gap:6px}
     .mobile-sizes .p-price{font-size:15px}
     .mobile-categories{gap:6px;margin-top:12px}.mobile-categories .pill{font-size:10.5px;padding:8px}

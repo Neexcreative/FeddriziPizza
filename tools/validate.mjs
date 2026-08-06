@@ -36,11 +36,14 @@ if (/href\s*=\s*["']\s*["']/i.test(html)) errors.push('Empty href navigation rem
 if (/javascript\s*:\s*void\s*\(\s*0\s*\)/i.test(html)) errors.push('javascript:void(0) navigation remains in index.html.');
 
 if ((html.match(/<h1\b/g) || []).length !== 1) errors.push('The document must contain exactly one H1.');
-if (!/<svg id="pizzaSvg"[^>]*aria-hidden="true"[^>]*focusable="false"/.test(html)) {
-  errors.push('The decorative pizza wheel must remain hidden from assistive technology.');
+if (!/<img id="pizzaWheel"[^>]*src="assets\/images\/pizzas\/FULL_PIZZA\.webp"[^>]*alt=""[^>]*aria-hidden="true"/.test(html)) {
+  errors.push('The master pizza image must remain decorative and use FULL_PIZZA.webp.');
+}
+if (/<svg id="pizzaSvg"|wedgeClip|class="slice"/.test(html)) {
+  errors.push('Legacy multi-slice pizza rendering remains in index.html.');
 }
 
-const modules = ['app.js', 'pizza-wheel.js', 'cart.js', 'modal.js', 'checkout.js', 'site-config.js'];
+const modules = ['app.js', 'pizza-wheel.js', 'cart.js', 'modal.js', 'checkout.js', 'site-config.js', 'information.js'];
 for (const module of modules) {
   const moduleUrl = new URL(`../js/${module}`, import.meta.url);
   try { await readFile(moduleUrl, 'utf8'); }

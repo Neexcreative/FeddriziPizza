@@ -40,8 +40,7 @@
     <a class="brand" href="#main" data-home aria-label="Fedrizzi Pizza home">Fedrizzi Pizza</a>
     <div class="links">
       <button class="lk nav-action" type="button" data-nav-action="delivery">Delivery</button>
-      <!-- TODO: Enable when verified FAQ content or a real FAQ page is available. -->
-      <button class="lk nav-action" type="button" disabled aria-disabled="true" title="FAQ pending">FAQ</button>
+      <button class="lk nav-action" type="button" data-nav-action="faq">FAQ</button>
     </div>
     <div class="actions">
       <button class="lk" id="loginBtn" style="background:none;border:none;color:var(--text)">Login</button>
@@ -67,10 +66,6 @@
   <main class="stage" id="main" tabindex="-1">
     <h2 class="flavor-name" id="fName">Pepperoni</h2>
     <div class="desc" id="fDesc"></div>
-    <div class="hero-action">
-      <button class="add-btn" id="addPizza">Add to order</button>
-      <span class="selected-price" id="selectedPrice">€22</span>
-    </div>
     <div class="mobile-categories" aria-label="Order extras">
       <button class="pill" data-cat="Drinks"><span>Drinks</span><span class="mobile-plus" aria-hidden="true">+</span></button>
       <button class="pill" data-cat="Dips"><span>Dips</span><span class="mobile-plus" aria-hidden="true">+</span></button>
@@ -88,24 +83,10 @@
   </div>
 
   <div class="mobile-sizes" id="mobileSizes"></div>
+  <button class="add-btn order-cta" id="addPizza">Add to order — <span id="selectedPrice">€22</span></button>
 
   <div class="pizza-wrap">
-    <svg id="pizzaSvg" viewBox="0 0 900 900" aria-hidden="true" focusable="false">
-      <defs>
-        <radialGradient id="doughG" cx="50%" cy="50%" r="52%">
-          <stop offset="0%" stop-color="oklch(0.56 0.09 62)"/><stop offset="72%" stop-color="oklch(0.50 0.10 55)"/>
-          <stop offset="90%" stop-color="oklch(0.42 0.10 48)"/><stop offset="100%" stop-color="oklch(0.34 0.09 42)"/>
-        </radialGradient>
-        <radialGradient id="topLight" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="oklch(0.95 0.06 75 / .5)"/><stop offset="55%" stop-color="oklch(0.9 0.06 70 / .1)"/>
-          <stop offset="100%" stop-color="transparent"/>
-        </radialGradient>
-      </defs>
-      <g id="wheel"></g>
-      <g style="mix-blend-mode:screen" pointer-events="none">
-        <ellipse cx="450" cy="150" rx="260" ry="220" fill="url(#topLight)"/>
-      </g>
-    </svg>
+    <img id="pizzaWheel" src="assets/images/pizzas/FULL_PIZZA.webp" alt="" aria-hidden="true" draggable="false">
   </div>
 
   <div class="socials">
@@ -124,9 +105,24 @@
   <div class="sheet mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-labelledby="mobileMenuTitle">
     <h2 id="mobileMenuTitle">Menu</h2>
     <button type="button" data-nav-action="delivery">Delivery</button>
-    <!-- TODO: Enable when verified FAQ content or a real FAQ page is available. -->
-    <button type="button" disabled aria-disabled="true" title="FAQ pending">FAQ</button>
+    <button type="button" data-nav-action="faq">FAQ</button>
     <button id="mobileAccount">Account / Login</button>
+  </div>
+
+  <!-- delivery information -->
+  <div class="sheet modal info-modal" id="deliveryInfoModal" role="dialog" aria-modal="true" aria-labelledby="deliveryInfoTitle">
+    <button class="x" data-close aria-label="Close delivery information">×</button>
+    <h2 id="deliveryInfoTitle">Delivery</h2>
+    <p class="sub">Fresh from our oven to your door.</p>
+    <div id="deliveryInfoContent"></div>
+  </div>
+
+  <!-- frequently asked questions -->
+  <div class="sheet modal info-modal" id="faqModal" role="dialog" aria-modal="true" aria-labelledby="faqTitle">
+    <button class="x" data-close aria-label="Close frequently asked questions">×</button>
+    <h2 id="faqTitle">Frequently asked questions</h2>
+    <p class="sub">Ordering information</p>
+    <div class="faq-list" id="faqList"></div>
   </div>
 
   <!-- cart dropdown -->
@@ -148,8 +144,8 @@
       <div class="field"><label for="address">Delivery address</label><input id="address" name="address" autocomplete="street-address" aria-describedby="addressError" placeholder="Street, Dublin"><small class="field-error" id="addressError"></small></div>
     </div>
     <div class="line"><span>Subtotal</span><span id="mSub">€0.00</span></div>
-    <div class="line" id="feeLine"><span>Delivery fee</span><span>€3.50</span></div>
-    <div class="line"><span>Estimated time</span><span id="eta">30–40 min</span></div>
+    <div class="line" id="feeLine"><span>Delivery fee</span><span id="deliveryFeeAmount"></span></div>
+    <div class="line"><span>Estimated time</span><span id="eta"></span></div>
     <div class="line big"><span>Total</span><b id="mTotal">€0.00</b></div>
     <button class="btn" id="toCheckout" style="margin-top:16px">Next</button>
   </div>

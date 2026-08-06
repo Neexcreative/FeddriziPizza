@@ -1,6 +1,5 @@
 import {formatMoney} from './cart.js';
-
-const DELIVERY_FEE=3.5;
+import {DELIVERY_CONFIG} from './site-config.js';
 
 const validators={
   firstName:value=>value.trim().length>1,
@@ -16,6 +15,8 @@ export function initCheckout({cart,modal}){
   const addressInput=document.getElementById('address');
   const addressError=document.getElementById('addressError');
   const checkoutForm=document.getElementById('checkoutForm');
+  document.getElementById('deliveryFeeAmount').textContent=formatMoney(DELIVERY_CONFIG.baseFee);
+  document.getElementById('eta').textContent=DELIVERY_CONFIG.deliveryEta;
 
   function clearAddressError(){
     addressInput.removeAttribute('aria-invalid');
@@ -35,12 +36,12 @@ export function initCheckout({cart,modal}){
   function fillOrderModal(){
     document.getElementById('modalItems').innerHTML=cart.getItems().map(item=>`<div class="line"><span>${item.qty||1}× ${item.name} <span style="opacity:.6">· ${item.size.split('·')[0]}</span></span><span>${formatMoney(item.price*(item.qty||1))}</span></div>`).join('');
     const subtotal=cart.sum();
-    const fee=mode==='delivery'?DELIVERY_FEE:0;
+    const fee=mode==='delivery'?DELIVERY_CONFIG.baseFee:0;
     document.getElementById('mSub').textContent=formatMoney(subtotal);
     document.getElementById('mTotal').textContent=formatMoney(subtotal+fee);
     document.getElementById('feeLine').style.display=mode==='delivery'?'flex':'none';
     document.getElementById('addrBlock').style.display=mode==='delivery'?'block':'none';
-    document.getElementById('eta').textContent=mode==='delivery'?'30–40 min':'15–20 min pickup';
+    document.getElementById('eta').textContent=mode==='delivery'?DELIVERY_CONFIG.deliveryEta:`${DELIVERY_CONFIG.collectionEta} pickup`;
   }
 
   function setMode(nextMode){

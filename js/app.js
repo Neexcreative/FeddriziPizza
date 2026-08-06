@@ -3,6 +3,7 @@ import {createCart} from './cart.js';
 import {createModalManager} from './modal.js';
 import {initCheckout} from './checkout.js';
 import {SOCIAL_LINKS} from './site-config.js';
+import {initInformationPanels} from './information.js';
 
 const EMBERS_ENABLED=false;
 
@@ -92,13 +93,15 @@ function initialize(){
   const pizzaWheel=createPizzaWheel();
   const embers=createEmberSystem();
   const cart=createCart({pizzaWheel,modal,burst:embers.burst});
-  const checkout=initCheckout({cart,modal});
+  initCheckout({cart,modal});
+  const information=initInformationPanels({modal});
 
   document.querySelector('[data-home]').addEventListener('click',event=>{
     event.preventDefault();
     document.getElementById('main').focus({preventScroll:true});
   });
-  document.querySelectorAll('[data-nav-action="delivery"]').forEach(button=>button.addEventListener('click',checkout.openDeliveryFlow));
+  document.querySelectorAll('[data-nav-action="delivery"]').forEach(button=>button.addEventListener('click',information.openDelivery));
+  document.querySelectorAll('[data-nav-action="faq"]').forEach(button=>button.addEventListener('click',information.openFaq));
   document.querySelectorAll('[data-social]').forEach(link=>{
     const url=SOCIAL_LINKS[link.dataset.social];
     if(url){
