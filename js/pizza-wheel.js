@@ -21,6 +21,10 @@ const BASE_ROTATION_OFFSET=22.5;
 
 const norm=i=>((i%N)+N)%N;
 
+const hasGsap=typeof gsap!=='undefined';
+if(hasGsap&&typeof InertiaPlugin!=='undefined')gsap.registerPlugin(InertiaPlugin);
+document.documentElement.classList.toggle('no-gsap',!hasGsap);
+
 export function createPizzaWheel(){
   let index=0;
   let continuousStep=0;
@@ -28,7 +32,9 @@ export function createPizzaWheel(){
   let size=1;
   let drag=false;
   let startX=0;
-  let startVisualRotation=0;
+  let startRotation=0;
+  let settleTween=null;
+  let swapTimeline=null;
 
   const wheel=document.getElementById('pizzaWheel');
   const wrap=document.querySelector('.pizza-wrap');
@@ -39,27 +45,51 @@ export function createPizzaWheel(){
   const sizeRail=document.getElementById('sizeRail');
   const mobileSizes=document.getElementById('mobileSizes');
 
+  if(hasGsap&&typeof InertiaPlugin!=='undefined')InertiaPlugin.track(wheel,'rotation');
+
   function updateReadout(){
     const flavor=flavors[index];
-    flavorName.classList.add('swap');
-    flavorDescription.classList.add('swap');
-    setTimeout(()=>{
+    const applyContent=()=>{
       flavorName.textContent=flavor.name;
       flavorDescription.innerHTML=`<span>${flavor.ing}</span>`+flavor.tags.map(tag=>`<span class="tag ${tag==='Vegetarian'?'v':''}">${tag}</span>`).join('');
-      flavorName.classList.remove('swap');
-      flavorDescription.classList.remove('swap');
-    },180);
+    };
+    if(hasGsap){
+      swapTimeline?.kill();
+      swapTimeline=gsap.timeline()
+        .to([flavorName,flavorDescription],{opacity:0,y:14,filter:'blur(6px)',duration:.18,ease:'power2.in'})
+        .call(applyContent)
+        .set([flavorName,flavorDescription],{filter:'blur(0px)'})
+        .to([flavorName,flavorDescription],{opacity:1,y:0,duration:.32,ease:'power2.out'});
+    }else{
+      flavorName.classList.add('swap');
+      flavorDescription.classList.add('swap');
+      setTimeout(()=>{
+        applyContent();
+        flavorName.classList.remove('swap');
+        flavorDescription.classList.remove('swap');
+      },180);
+    }
     previousLabel.textContent=flavors[norm(index-1)].name;
     nextLabel.textContent=flavors[norm(index+1)].name;
+  }
+
+  function setRotation(rotation,animate){
+    settleTween?.kill();
+    visualRotation=rotation;
+    if(!hasGsap){
+      wheel.style.transition=animate?'':'none';
+      wheel.style.transform=`rotate(${rotation}deg)`;
+      if(!animate)requestAnimationFrame(()=>wheel.style.transition='');
+      return;
+    }
+    if(animate)settleTween=gsap.to(wheel,{rotation,duration:.62,ease:'power3.out'});
+    else gsap.set(wheel,{rotation});
   }
 
   function goTo(nextStep,animate=true){
     continuousStep=nextStep;
     index=norm(continuousStep);
-    visualRotation=BASE_ROTATION_OFFSET-continuousStep*SLICE;
-    if(!animate)wheel.style.transition='none';
-    wheel.style.transform=`rotate(${visualRotation}deg)`;
-    if(!animate)requestAnimationFrame(()=>wheel.style.transition='');
+    setRotation(BASE_ROTATION_OFFSET-continuousStep*SLICE,animate);
     updateReadout();
   }
 
@@ -90,9 +120,38 @@ export function createPizzaWheel(){
     goTo(continuousStep+(event.key==='ArrowRight'?1:-1));
   });
 
-  const pointerDown=x=>{drag=true;startX=x;startVisualRotation=visualRotation;document.body.classList.add('dragging')};
-  const pointerMove=x=>{if(!drag)return;visualRotation=startVisualRotation+(x-startX)*0.32;wheel.style.transform=`rotate(${visualRotation}deg)`};
-  const pointerUp=()=>{if(!drag)return;drag=false;document.body.classList.remove('dragging');goTo(Math.round((BASE_ROTATION_OFFSET-visualRotation)/SLICE))};
+  const pointerDown=x=>{
+    settleTween?.kill();
+    drag=true;
+    startX=x;
+    startRotation=visualRotation;
+    document.body.classList.add('dragging');
+  };
+  const pointerMove=x=>{
+    if(!drag)return;
+    visualRotation=startRotation+(x-startX)*0.32;
+    if(hasGsap)gsap.set(wheel,{rotation:visualRotation});
+    else wheel.style.transform=`rotate(${visualRotation}deg)`;
+  };
+  const pointerUp=()=>{
+    if(!drag)return;
+    drag=false;
+    document.body.classList.remove('dragging');
+    if(!hasGsap||typeof InertiaPlugin==='undefined'){
+      goTo(Math.round((BASE_ROTATION_OFFSET-visualRotation)/SLICE));
+      return;
+    }
+    const snap=value=>BASE_ROTATION_OFFSET-Math.round((BASE_ROTATION_OFFSET-value)/SLICE)*SLICE;
+    settleTween=gsap.to(wheel,{
+      inertia:{rotation:{velocity:'auto',end:snap}},
+      onUpdate(){visualRotation=gsap.getProperty(wheel,'rotation')},
+      onComplete(){
+        continuousStep=Math.round((BASE_ROTATION_OFFSET-visualRotation)/SLICE);
+        index=norm(continuousStep);
+        updateReadout();
+      }
+    });
+  };
   wrap.addEventListener('pointerdown',event=>pointerDown(event.clientX));
   addEventListener('pointermove',event=>pointerMove(event.clientX));
   addEventListener('pointerup',pointerUp);

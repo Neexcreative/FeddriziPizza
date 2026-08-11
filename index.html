@@ -29,6 +29,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/responsive.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/InertiaPlugin.min.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to menu</a>
@@ -73,17 +75,19 @@
     </div>
   </main>
 
-  <div class="arrow-wrap left">
-    <span class="arrow-lbl" id="lblPrev"></span>
-    <button class="arrow" id="prev" aria-label="Previous pizza"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
-  </div>
-  <div class="arrow-wrap right">
-    <span class="arrow-lbl" id="lblNext"></span>
-    <button class="arrow" id="next" aria-label="Next pizza"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
-  </div>
+  <div class="mobile-order-zone">
+    <div class="arrow-wrap left">
+      <span class="arrow-lbl" id="lblPrev"></span>
+      <button class="arrow" id="prev" aria-label="Previous pizza"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+    </div>
+    <div class="arrow-wrap right">
+      <span class="arrow-lbl" id="lblNext"></span>
+      <button class="arrow" id="next" aria-label="Next pizza"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
 
-  <div class="mobile-sizes" id="mobileSizes"></div>
-  <button class="add-btn order-cta" id="addPizza">Add to order — <span id="selectedPrice">€22</span></button>
+    <div class="mobile-sizes" id="mobileSizes"></div>
+    <button class="add-btn order-cta" id="addPizza">Add to order — <span id="selectedPrice">€22</span></button>
+  </div>
 
   <div class="pizza-wrap">
     <img id="pizzaWheel" src="assets/images/pizzas/FULL_PIZZA.webp" alt="" aria-hidden="true" draggable="false">
