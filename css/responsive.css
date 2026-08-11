@@ -13,36 +13,38 @@
     .mobile-categories .pill{min-width:0;min-height:44px;flex:1;justify-content:center;padding:9px 10px;gap:7px}
     .mobile-categories .mobile-plus{color:var(--accent-hi);font-size:15px;line-height:1}
 
-    /* ---- coordinated mobile ordering zone: arrows + CTA + sizes as one grid, anchored above the pizza ---- */
+    /* ---- coordinated mobile ordering zone: arrows + CTA on row 1, sizes wrap to row 2, anchored above the pizza ---- */
     .mobile-order-zone{
       --size:min(700px,180vw);
-      display:grid;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:center;
       position:fixed;
       left:50%;
-      bottom:calc(var(--size) * 0.46 + 26px);
+      bottom:calc(var(--size) * 0.46 + 14px);
       transform:translateX(-50%);
-      width:min(390px,calc(100vw - 28px));
-      grid-template-columns:48px minmax(0,1fr) 48px;
-      grid-template-areas:"prev cta next" "sizes sizes sizes";
-      align-items:center;
-      row-gap:14px;
-      column-gap:10px;
+      width:min(330px,calc(100vw - 24px));
+      column-gap:8px;
+      row-gap:8px;
       z-index:27;
       pointer-events:none;
     }
-    .mobile-order-zone .arrow-wrap.left{grid-area:prev;position:static;justify-self:start;pointer-events:auto}
-    .mobile-order-zone .arrow-wrap.right{grid-area:next;position:static;justify-self:end;pointer-events:auto}
-    .mobile-order-zone .arrow{width:44px;height:44px}
+    .mobile-order-zone .arrow-wrap.left{order:1;position:static;flex:0 0 42px;pointer-events:auto}
+    .mobile-order-zone .arrow-wrap.right{order:3;position:static;flex:0 0 42px;pointer-events:auto}
+    .mobile-order-zone .arrow{width:42px;height:42px}
     .mobile-order-zone #addPizza{
-      grid-area:cta;position:static;top:auto;left:auto;transform:none;
-      width:100%;min-height:42px;padding:0 10px;font-size:9.5px;pointer-events:auto}
+      order:2;position:static;top:auto;left:auto;transform:none;
+      flex:0 0 auto;width:clamp(190px,58vw,230px);min-width:0;min-height:42px;
+      padding:0 10px;font-size:9px;letter-spacing:.05em;pointer-events:auto}
     .mobile-order-zone #addPizza:hover{transform:translateY(-2px)}
-    .mobile-order-zone #addPizza span{font-size:14px}
+    .mobile-order-zone #addPizza span{font-size:13px}
     .mobile-order-zone #mobileSizes{
-      grid-area:sizes;display:flex !important;position:static;left:auto;bottom:auto;transform:none;
-      width:100%;gap:6px;pointer-events:auto}
-    .mobile-order-zone #mobileSizes .pill{min-width:0;flex:1;justify-content:center;min-height:40px;padding:8px 6px;gap:5px}
-    .mobile-order-zone #mobileSizes .p-price{font-size:13px}
+      order:4;display:flex !important;position:static;left:auto;bottom:auto;transform:none;
+      flex:0 0 auto;width:auto;gap:8px;pointer-events:auto}
+    .mobile-order-zone #mobileSizes .pill{min-width:0;flex:0 0 auto;justify-content:center;
+      min-height:36px;padding:6px 15px;gap:5px;font-size:10.5px}
+    .mobile-order-zone #mobileSizes .p-price{font-size:12px}
   }
   @media (max-width:520px){
     .nav{padding:14px 16px}.brand{font-size:15px}.nav .actions{gap:8px}
