@@ -68,25 +68,28 @@
   <main class="stage" id="main" tabindex="-1">
     <h2 class="flavor-name" id="fName">Pepperoni</h2>
     <div class="desc" id="fDesc"></div>
+  </main>
+
+  <div class="mobile-order-zone">
     <div class="mobile-categories" aria-label="Order extras">
       <button class="pill" data-cat="Drinks"><span>Drinks</span><span class="mobile-plus" aria-hidden="true">+</span></button>
       <button class="pill" data-cat="Dips"><span>Dips</span><span class="mobile-plus" aria-hidden="true">+</span></button>
       <button class="pill" data-cat="Fries"><span>Fries</span><span class="mobile-plus" aria-hidden="true">+</span></button>
     </div>
-  </main>
 
-  <div class="mobile-order-zone">
-    <div class="arrow-wrap left">
-      <span class="arrow-lbl" id="lblPrev"></span>
-      <button class="arrow" id="prev" aria-label="Previous pizza"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
-    </div>
-    <div class="arrow-wrap right">
-      <span class="arrow-lbl" id="lblNext"></span>
-      <button class="arrow" id="next" aria-label="Next pizza"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    <div class="order-row">
+      <div class="arrow-wrap left">
+        <span class="arrow-lbl" id="lblPrev"></span>
+        <button class="arrow" id="prev" aria-label="Previous pizza"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      </div>
+      <button class="add-btn order-cta" id="addPizza">Add to order — <span id="selectedPrice">€22</span></button>
+      <div class="arrow-wrap right">
+        <span class="arrow-lbl" id="lblNext"></span>
+        <button class="arrow" id="next" aria-label="Next pizza"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
     </div>
 
     <div class="mobile-sizes" id="mobileSizes"></div>
-    <button class="add-btn order-cta" id="addPizza">Add to order — <span id="selectedPrice">€22</span></button>
   </div>
 
   <div class="pizza-wrap">

@@ -103,7 +103,7 @@
   .tag.v{color:oklch(0.72 0.13 145);border-color:oklch(0.55 0.13 145 / .5)}
 
   /* ---------- mobile order zone (desktop: transparent wrapper) ---------- */
-  .mobile-order-zone{display:contents}
+  .mobile-order-zone,.order-row{display:contents}
 
   /* ---------- arrows ---------- */
   .arrow-wrap{position:fixed;top:46%;z-index:24;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:auto}
