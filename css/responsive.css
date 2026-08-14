@@ -30,7 +30,7 @@
 
     .mobile-order-zone .mobile-categories{
       display:flex !important;pointer-events:auto;gap:8px;width:100%}
-    .mobile-order-zone .mobile-categories .pill{min-width:0;min-height:40px;flex:1;justify-content:center;padding:8px 10px;gap:7px}
+    .mobile-order-zone .mobile-categories .pill{min-width:0;min-height:44px;flex:1;justify-content:center;padding:8px 10px;gap:7px}
     .mobile-order-zone .mobile-categories .mobile-plus{color:var(--accent-hi);font-size:15px;line-height:1}
 
     .mobile-order-zone .order-row{display:flex;align-items:center;justify-content:center;gap:8px;width:100%}
@@ -86,6 +86,9 @@
 
     .pizza-wrap{--size:min(560px,120vw,105vh);bottom:calc(-1 * var(--size) * 0.54)}
     .mobile-order-zone{--size:min(560px,120vw,105vh);row-gap:6px;bottom:calc(var(--size) * 0.46 + 6px)}
+    /* below the 44px touch-target minimum on purpose: this is the ~375-412px-tall
+       landscape state, and 44px targets here don't fit alongside a visible title
+       without reintroducing the C1/C2 overlap/off-screen bug. See LOTE 2 commit. */
     .mobile-order-zone .mobile-categories .pill{min-height:28px;padding:5px 8px;gap:4px;font-size:9.5px}
     .mobile-order-zone .mobile-categories .mobile-plus{font-size:12px}
     .mobile-order-zone .order-row{gap:6px}
