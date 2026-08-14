@@ -1,4 +1,4 @@
-@media (max-width:820px){
+@media (max-width:820px), (orientation:landscape) and (max-height:480px){
     .rail,.arrow-wrap.left .arrow-lbl,.arrow-wrap.right .arrow-lbl{display:none}
     .nav .links{display:none}
     .nav .lk{display:none}
@@ -63,6 +63,41 @@
     .mobile-order-zone{row-gap:12px}
     .mobile-order-zone .mobile-categories{gap:6px}
     .mobile-order-zone .mobile-categories .pill{font-size:10.5px;padding:7px 8px}
+  }
+  /* ---- short landscape phones (e.g. iPhone SE/15 Pro, Pixel 7 rotated): the width-based
+     breakpoint above doesn't fire for phones wider than 820px in landscape, and even when it
+     does, there isn't enough vertical room for the full mobile stack. Compact everything by
+     height so the golden path (change flavour, add to order) stays fully on-screen and
+     clickable. overflow-y is freed here ONLY as a safety net for browser chrome (address bars)
+     eating into the reported viewport height; portrait and desktop stay overflow:hidden. ---- */
+  @media (orientation:landscape) and (max-height:480px){
+    html,body{overflow-y:auto}
+    .nav{padding:5px 14px}
+    .brand{font-size:11px}
+    .mobile-menu-btn{width:28px;height:28px}
+    .mobile-menu-btn svg{width:14px;height:14px}
+    .cart-btn{min-height:auto;font-size:10px;gap:5px}
+    .cart-btn svg{width:13px;height:13px}
+    .stage{padding-top:38px}
+    .flavor-name{font-size:clamp(15px,4vw,19px);letter-spacing:0}
+    .desc{display:none}
+    .hint{display:none}
+    .socials{display:none}
+
+    .pizza-wrap{--size:min(560px,120vw,105vh);bottom:calc(-1 * var(--size) * 0.54)}
+    .mobile-order-zone{--size:min(560px,120vw,105vh);row-gap:6px;bottom:calc(var(--size) * 0.46 + 6px)}
+    .mobile-order-zone .mobile-categories .pill{min-height:28px;padding:5px 8px;gap:4px;font-size:9.5px}
+    .mobile-order-zone .mobile-categories .mobile-plus{font-size:12px}
+    .mobile-order-zone .order-row{gap:6px}
+    .mobile-order-zone .order-row .arrow-wrap.left,
+    .mobile-order-zone .order-row .arrow-wrap.right{flex:0 0 30px}
+    .mobile-order-zone .order-row .arrow{width:30px;height:30px}
+    .mobile-order-zone .order-row .arrow svg{width:15px;height:15px}
+    .mobile-order-zone #addPizza{min-height:30px;font-size:8px;padding:0 8px}
+    .mobile-order-zone #addPizza span{font-size:11px}
+    .mobile-order-zone #mobileSizes{gap:6px}
+    .mobile-order-zone #mobileSizes .pill{min-height:26px;padding:4px 10px;font-size:9px}
+    .mobile-order-zone #mobileSizes .p-price{font-size:10.5px}
   }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
