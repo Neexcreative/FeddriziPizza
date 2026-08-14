@@ -97,6 +97,7 @@ export function createPizzaWheel(){
     container.innerHTML='';
     sizes.forEach((option,i)=>{
       const button=document.createElement('button');
+      button.type='button';
       button.className=`pill size${i===size?' on':''}`;
       button.innerHTML=compact
         ? `<span>${option.k}</span><span class="p-price">€${option.price}</span>`

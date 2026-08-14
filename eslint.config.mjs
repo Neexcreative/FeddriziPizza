@@ -1,6 +1,7 @@
 import js from '@eslint/js';
 
 export default [
+  { ignores: ['js/vendor/**'] },
   js.configs.recommended,
   {
     languageOptions: {
@@ -12,9 +13,14 @@ export default [
         addEventListener: 'readonly',
         localStorage: 'readonly',
         devicePixelRatio: 'readonly',
+        innerWidth: 'readonly',
+        innerHeight: 'readonly',
+        cancelAnimationFrame: 'readonly',
         requestAnimationFrame: 'readonly',
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
+        getComputedStyle: 'readonly',
+        Element: 'readonly',
         gsap: 'readonly',
         InertiaPlugin: 'readonly',
         matchMedia: 'readonly',
