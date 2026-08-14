@@ -102,20 +102,15 @@ function initialize(){
   });
   document.querySelectorAll('[data-nav-action="delivery"]').forEach(button=>button.addEventListener('click',information.openDelivery));
   document.querySelectorAll('[data-nav-action="faq"]').forEach(button=>button.addEventListener('click',information.openFaq));
-  document.querySelectorAll('[data-social]').forEach(link=>{
-    const url=SOCIAL_LINKS[link.dataset.social];
+  document.querySelectorAll('[data-social]').forEach(button=>{
+    const url=SOCIAL_LINKS[button.dataset.social];
     if(url){
-      link.href=url;
-      link.target='_blank';
-      link.rel='noopener noreferrer';
-      link.removeAttribute('aria-disabled');
-      link.removeAttribute('tabindex');
+      button.disabled=false;
+      button.addEventListener('click',()=>window.open(url,'_blank','noopener,noreferrer'));
       return;
     }
-    link.removeAttribute('href');
-    link.setAttribute('aria-disabled','true');
-    link.setAttribute('tabindex','-1');
-    link.title=`${link.getAttribute('aria-label')} link pending`;
+    button.disabled=true;
+    button.title=`${button.getAttribute('aria-label')} link pending`;
   });
 }
 
