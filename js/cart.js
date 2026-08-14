@@ -46,6 +46,7 @@ export function createCart({pizzaWheel,modal,burst=()=>{}}){
     const total=sum();
     animateTotal(document.getElementById('cartTotal'),total);
     animateTotal(document.getElementById('ddTotal'),total);
+    document.getElementById('cartBtn').setAttribute('aria-label',`Open cart, ${formatMoney(total)}`);
     if(!items.length)cartItems.innerHTML='<div class="cart-empty">Your order is empty</div>';
     else cartItems.innerHTML=items.map((item,index)=>`<div class="ci"><div><div class="ci-n">${item.name}</div><div class="ci-s">${item.size||''}</div></div><div style="display:flex;align-items:center;gap:9px"><div class="qty" aria-label="Quantity"><button data-qty="${index}|-1" aria-label="Decrease ${item.name}">−</button><span>${item.qty||1}</span><button data-qty="${index}|1" aria-label="Increase ${item.name}">+</button></div><span class="ci-p">${formatMoney(item.price*(item.qty||1))}</span><button class="rm" data-rm="${index}" aria-label="Remove ${item.name}">×</button></div></div>`).join('');
     document.getElementById('goCart').disabled=!items.length;
