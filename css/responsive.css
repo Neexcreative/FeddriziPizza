@@ -58,11 +58,11 @@
     .cart-dd{left:14px;right:14px;top:62px;width:auto}.modal{padding:25px 20px;max-height:calc(100dvh - 28px)}
     .row2,.info-grid,.delivery-examples{grid-template-columns:1fr}.socials{display:none}.hint{bottom:18px;font-size:8px}
     .info-modal{padding:25px 18px}.info-card,.info-section{padding:14px}
-    .mobile-order-zone #mobileSizes .pill{padding:7px 4px;font-size:10.5px}
-    .mobile-order-zone #mobileSizes .p-price{font-size:12px}
     .mobile-order-zone{row-gap:12px}
     .mobile-order-zone .mobile-categories{gap:6px}
     .mobile-order-zone .mobile-categories .pill{font-size:10.5px;padding:7px 8px}
+    .mobile-order-zone #mobileSizes .pill{padding:7px 4px;font-size:10.5px}
+    .mobile-order-zone #mobileSizes .p-price{font-size:12px}
   }
   /* ---- short landscape phones (e.g. iPhone SE/15 Pro, Pixel 7 rotated): the width-based
      breakpoint above doesn't fire for phones wider than 820px in landscape, and even when it

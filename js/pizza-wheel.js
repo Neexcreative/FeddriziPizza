@@ -36,7 +36,7 @@ export function createPizzaWheel(){
   let settleTween=null;
   let swapTimeline=null;
 
-  const wheel=document.getElementById('pizzaWheel');
+  const wheel=document.getElementById('pizza-wheel');
   const wrap=document.querySelector('.pizza-wrap');
   const flavorName=document.getElementById('fName');
   const flavorDescription=document.getElementById('fDesc');
