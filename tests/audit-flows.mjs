@@ -47,9 +47,9 @@ async function runFlow(label, browserType, viewport, isMobile) {
       const y = box.y + box.height * 0.3;
       await page.mouse.move(startX, y);
       await page.mouse.down();
-      await page.mouse.move(startX - 220, y, { steps: 12 });
+      for (let i = 1; i <= 10; i++) { await page.mouse.move(startX - i * 25, y, { steps: 1 }); await page.waitForTimeout(16); }
       await page.mouse.up();
-      await page.waitForTimeout(900);
+      await page.waitForTimeout(4200);
       const nameAfter = await page.textContent('#fName');
       record(`${label}: drag wheel changes flavor`, nameBefore !== nameAfter, `${nameBefore} -> ${nameAfter}`);
     } else {
