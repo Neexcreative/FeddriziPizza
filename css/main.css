@@ -1,15 +1,5 @@
 :root{
-    --bg:      #1e1e1e;
-    --bg-2:    #161514;
-    --panel:   oklch(0.22 0.012 55);
-    --panel-2: oklch(0.18 0.012 55);
-    --border:  oklch(0.42 0.02 55 / .45);
-    --text:    oklch(0.96 0.008 85);
-    --muted:   oklch(0.66 0.02 60);
-    --accent:  oklch(0.62 0.20 32);
-    --accent-hi:oklch(0.70 0.19 40);
-    --ember:   oklch(0.76 0.16 60);
-    --gap:     14px;
+    --gap: 14px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{height:100%;overflow:hidden}
@@ -32,7 +22,7 @@
 
   .oven-glow{position:fixed;left:50%;bottom:-26%;transform:translateX(-50%);
     width:150vw;height:80vh;z-index:0;pointer-events:none;mix-blend-mode:screen;filter:blur(7px);
-    background:radial-gradient(ellipse at center bottom, oklch(0.62 0.20 30 / .28) 0%, oklch(0.70 0.18 50 / .12) 30%, transparent 62%);
+    background:radial-gradient(ellipse at center bottom, color-mix(in oklch, var(--accent) 28%, transparent) 0%, color-mix(in oklch, var(--accent-hi) 12%, transparent) 30%, transparent 62%);
     animation:breathe 5.5s ease-in-out infinite}
   @keyframes breathe{0%,100%{opacity:.7}50%{opacity:1}}
   #fx{position:fixed;inset:0;z-index:2;pointer-events:none}
@@ -51,6 +41,7 @@
   .nav-action{background:none;border:0;color:var(--text)}
   .nav .lk:disabled{opacity:.42;cursor:default;color:var(--text)}
   .nav .actions{grid-column:3;display:flex;gap:26px;align-items:center;justify-content:flex-end}
+  #loginBtn{background:none;border:none;color:var(--text)}
   .mobile-menu-btn,.mobile-categories{display:none}
   .mobile-menu-btn{width:44px;height:44px;border:1px solid var(--border);border-radius:50%;background:var(--panel-2);
     color:var(--text);place-items:center;transition:.25s}
@@ -93,9 +84,9 @@
     display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;transition:opacity .4s}
   .desc.swap{opacity:0}
   .add-btn{border:1px solid oklch(0.78 0.13 55 / .45);border-radius:999px;padding:12px 20px;color:var(--text);
-    background:linear-gradient(135deg,oklch(0.66 0.21 35),oklch(0.54 0.2 27));font-size:11px;font-weight:600;
-    letter-spacing:.14em;text-transform:uppercase;box-shadow:0 10px 30px oklch(0.55 0.2 28 / .28);transition:.25s}
-  .add-btn:hover{transform:translateY(-2px);box-shadow:0 15px 36px oklch(0.55 0.2 28 / .45)}
+    background:linear-gradient(135deg,var(--cta-grad-from),var(--cta-grad-to));font-size:11px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;box-shadow:0 10px 30px color-mix(in oklch, var(--cta-grad-to) 28%, transparent);transition:.25s}
+  .add-btn:hover{transform:translateY(-2px);box-shadow:0 15px 36px color-mix(in oklch, var(--cta-grad-to) 45%, transparent)}
   .order-cta{position:fixed;top:calc(clamp(96px,15vh,150px) + 198px);left:clamp(16px,3vw,44px);z-index:25;
     width:172px;min-height:44px;padding:11px 10px;white-space:nowrap;font-size:10px;pointer-events:auto}
   .order-cta span{font-family:'Bodoni Moda',serif;font-size:16px;letter-spacing:0}
@@ -115,7 +106,7 @@
   .arrow{width:46px;height:46px;border-radius:50%;background:oklch(0.5 0.02 55 / .28);
     border:1px solid oklch(0.6 0.02 55 / .2);backdrop-filter:blur(6px);color:var(--text);
     display:grid;place-items:center;transition:.25s}
-  .arrow:hover{background:oklch(0.62 0.20 32 / .35);border-color:var(--accent)}
+  .arrow:hover{background:color-mix(in oklch, var(--accent) 35%, transparent);border-color:var(--accent)}
   .arrow:active{transform:scale(.9)}
   .arrow svg{width:20px;height:20px}
 
@@ -173,12 +164,15 @@
   .cart-total b{font-family:'Bodoni Moda',serif;font-size:22px;font-weight:500}
   .btn{width:100%;text-align:center;border:none;border-radius:999px;padding:14px;font-size:12px;
     letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--text);
-    background:linear-gradient(oklch(0.64 0.21 34), oklch(0.56 0.20 28));
-    box-shadow:0 8px 26px oklch(0.60 0.205 28 / .35);transition:.25s cubic-bezier(.16,1,.3,1)}
-  .btn:hover{transform:translateY(-2px);box-shadow:0 14px 38px oklch(0.60 0.205 28 / .5)}
+    background:linear-gradient(var(--cta-grad-from), var(--cta-grad-to));
+    box-shadow:0 8px 26px color-mix(in oklch, var(--cta-grad-to) 35%, transparent);transition:.25s cubic-bezier(.16,1,.3,1)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 14px 38px color-mix(in oklch, var(--cta-grad-to) 50%, transparent)}
   .btn.ghost{background:none;border:1px solid var(--border);box-shadow:none;color:var(--muted)}
   .btn.ghost:hover{color:var(--text);border-color:var(--accent);transform:none}
   .btn:disabled{opacity:.4;pointer-events:none}
+  .btn-signin{margin-top:20px}
+  #toCheckout{margin-top:16px}
+  #placeOrder{margin-top:10px}
 
   /* centered modal */
   .modal{top:50%;left:50%;transform:translate(-50%,-46%);width:min(520px,92vw);max-height:86vh;overflow:auto;
@@ -197,8 +191,8 @@
   .field input{width:100%;background:var(--panel-2);border:1px solid var(--border);border-radius:12px;
     padding:13px 15px;color:var(--text);font-family:inherit;font-size:14px;outline:none;transition:.2s}
   .field input:focus{border-color:var(--accent)}
-  .field input[aria-invalid="true"]{border-color:oklch(0.67 0.2 25)}
-  .field-error{display:block;min-height:14px;margin-top:5px;color:oklch(0.76 0.15 28);font-size:10px}
+  .field input[aria-invalid="true"]{border-color:var(--error)}
+  .field-error{display:block;min-height:14px;margin-top:5px;color:var(--error-text);font-size:10px}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .line{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);padding:7px 0}
   .line.big{color:var(--text);border-top:1px solid var(--border);margin-top:8px;padding-top:14px}
@@ -208,7 +202,10 @@
     border-radius:999px;padding:8px 14px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;transition:.2s}
   .tabs button.on{background:var(--accent);color:var(--text);border-color:var(--accent)}
   .tabpane{font-size:13.5px;line-height:1.7;color:var(--muted);min-height:90px}
+  #checkoutDone{display:none}
   .confirm{text-align:center;padding:14px 0}
+  .confirm .sub{margin-bottom:20px}
+  .confirm .btn.ghost{max-width:200px;margin:0 auto}
   .confirm .ok{width:58px;height:58px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;
     background:oklch(0.55 0.16 145 / .18);border:1px solid oklch(0.6 0.15 145 / .5);color:oklch(0.75 0.15 145);font-size:26px}
   .confirm .num{font-family:'Bodoni Moda',serif;font-size:20px;margin:8px 0 4px}
@@ -230,10 +227,10 @@
   .delivery-examples div{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border:1px solid var(--border);border-radius:11px}
   .delivery-examples span{color:var(--accent-hi);font-size:11px;font-weight:600}.delivery-examples strong{font-size:11px}
   .info-note{margin-top:12px}.info-section ul{padding-left:18px;display:grid;gap:5px}
-  .allergy-note{border-color:oklch(0.62 0.20 32 / .45)}
+  .allergy-note{border-color:color-mix(in oklch, var(--accent) 45%, transparent)}
   .faq-list{display:grid;gap:8px}
   .faq-item{border:1px solid var(--border);border-radius:13px;background:var(--panel-2);overflow:hidden;transition:border-color .2s}
-  .faq-item:has(button[aria-expanded="true"]){border-color:oklch(0.62 0.20 32 / .65)}
+  .faq-item:has(button[aria-expanded="true"]){border-color:color-mix(in oklch, var(--accent) 65%, transparent)}
   .faq-item h3{font-size:inherit}
   .faq-item button{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:48px;padding:12px 15px;
     border:0;background:transparent;color:var(--text);text-align:left;font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase}

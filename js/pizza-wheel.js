@@ -1,19 +1,4 @@
-export const flavors = [
-  {name:'Pepperoni',ing:'Mozzarella, spicy pepperoni, tomato base',tags:['Gluten','Dairy']},
-  {name:'Veggie Supreme',ing:'Cherry tomato, peppers, mozzarella, garden veg',tags:['Vegetarian','Gluten','Dairy']},
-  {name:'Mushroom & Ham',ing:'Mushrooms, ham, mozzarella',tags:['Gluten','Dairy']},
-  {name:'Mediterranean',ing:'Green olives, green pepper, mozzarella, basil',tags:['Vegetarian','Gluten','Dairy']},
-  {name:'Hawaiian',ing:'Ham, pineapple, mozzarella',tags:['Gluten','Dairy']},
-  {name:'Greek Supreme',ing:'Black olives, peppers, tomato, feta',tags:['Vegetarian','Gluten','Dairy']},
-  {name:'Ham & Onion',ing:'Caramelised onion, ham, mozzarella, white base',tags:['Gluten','Dairy']},
-  {name:'Italian Supreme',ing:'Black olives, salami, tomato, mozzarella',tags:['Gluten','Dairy']}
-];
-
-export const sizes = [
-  {k:'Small',slices:4,price:18},
-  {k:'Medium',slices:8,price:22},
-  {k:'Large',slices:12,price:28}
-];
+import {FLAVORS as flavors, SIZES as sizes} from './site-config.js';
 
 const N=flavors.length;
 const SLICE=360/N;

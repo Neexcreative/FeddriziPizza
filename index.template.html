@@ -1,28 +1,27 @@
-<!-- GERADO AUTOMATICAMENTE por "npm run build" a partir de index.template.html + config/pizzeria.json. Nao edite este arquivo direto: suas mudancas serao substituidas no proximo build. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#161514">
-<meta name="description" content="Handcrafted artisan pizzas, made fresh to order. Choose your favourite and build your order at Fedrizzi Pizza.">
-<meta name="robots" content="noindex, nofollow, noarchive">
-<title>Fedrizzi Pizza | Artisan Pizza &amp; Online Ordering</title>
+<meta name="description" content="{{META_DESCRIPTION}}">
+<meta name="robots" content="{{ROBOTS}}">
+<title>{{TITLE}}</title>
 
-<meta property="og:title" content="Fedrizzi Pizza | Artisan Pizza &amp; Online Ordering">
-<meta property="og:description" content="Handcrafted artisan pizzas, made fresh to order. Choose your favourite and build your order at Fedrizzi Pizza.">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{META_DESCRIPTION}}">
 <meta property="og:type" content="website">
-<meta property="og:url" content="">
-<meta property="og:image" content="assets/images/pizzas/pepperoni.webp">
-<meta property="og:image:alt" content="Pepperoni pizza from Fedrizzi Pizza">
-<meta property="og:site_name" content="Fedrizzi Pizza">
+<meta property="og:url" content="{{CANONICAL_URL}}">
+<meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="og:image:alt" content="{{OG_IMAGE_ALT}}">
+<meta property="og:site_name" content="{{BRAND_NAME}}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Fedrizzi Pizza | Artisan Pizza &amp; Online Ordering">
-<meta name="twitter:description" content="Handcrafted artisan pizzas, made fresh to order. Choose your favourite and build your order at Fedrizzi Pizza.">
-<meta name="twitter:image" content="assets/images/pizzas/pepperoni.webp">
-<meta name="twitter:image:alt" content="Pepperoni pizza from Fedrizzi Pizza">
-
-
+<meta name="twitter:title" content="{{TITLE}}">
+<meta name="twitter:description" content="{{META_DESCRIPTION}}">
+<meta name="twitter:image" content="{{OG_IMAGE}}">
+<meta name="twitter:image:alt" content="{{OG_IMAGE_ALT}}">
+{{CANONICAL_LINK}}
+{{STRUCTURED_DATA}}
 <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,9 +39,9 @@
   <canvas id="fx" aria-hidden="true"></canvas>
 
   <header>
-    <h1 class="sr-only">Fedrizzi Pizza — artisan pizza ordering</h1>
+    <h1 class="sr-only">{{BRAND_NAME}} — artisan pizza ordering</h1>
     <nav class="nav" aria-label="Primary navigation">
-      <a class="brand" href="#main" data-home aria-label="Fedrizzi Pizza home">Fedrizzi Pizza</a>
+      <a class="brand" href="#main" data-home aria-label="{{BRAND_NAME}} home">{{BRAND_NAME}}</a>
       <div class="links">
         <button class="lk nav-action" type="button" data-nav-action="delivery">Delivery</button>
         <button class="lk nav-action" type="button" data-nav-action="faq">FAQ</button>

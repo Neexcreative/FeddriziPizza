@@ -4,6 +4,7 @@ export default [
   { ignores: ['js/vendor/**'] },
   js.configs.recommended,
   {
+    files: ['js/**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
@@ -29,6 +30,18 @@ export default [
         Number: 'readonly',
         JSON: 'readonly',
         RangeError: 'readonly',
+      },
+    },
+  },
+  {
+    files: ['tools/**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+        URL: 'readonly',
       },
     },
   },

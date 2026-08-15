@@ -1,0 +1,54 @@
+{
+  "_comment": "Edite este arquivo para configurar sua pizzaria. Depois rode: npm run build. Veja COMO-USAR.md para o passo a passo.",
+
+  "brand": {
+    "name": "Fedrizzi Pizza",
+    "tagline": "Handcrafted artisan pizzas, made fresh to order.",
+    "color": "#e5462c"
+  },
+
+  "seo": {
+    "canonicalUrl": null,
+    "robots": "noindex, nofollow, noarchive",
+    "ogImageFlavorIndex": 0
+  },
+
+  "contact": {
+    "phone": null,
+    "email": null,
+    "address": null,
+    "openingHours": null
+  },
+
+  "social": {
+    "instagram": null,
+    "facebook": null,
+    "google": null,
+    "whatsapp": null
+  },
+
+  "delivery": {
+    "baseFee": 3.5,
+    "standardRadiusKm": 10,
+    "extraFeePerKm": 0.75,
+    "deliveryEta": "30–40 min",
+    "collectionEta": "15–20 min"
+  },
+
+  "sizes": [
+    { "key": "Small", "slices": 4, "price": 18 },
+    { "key": "Medium", "slices": 8, "price": 22 },
+    { "key": "Large", "slices": 12, "price": 28 }
+  ],
+
+  "flavors": [
+    { "name": "Pepperoni", "ingredients": "Mozzarella, spicy pepperoni, tomato base", "tags": ["Gluten", "Dairy"], "image": "pepperoni.webp" },
+    { "name": "Veggie Supreme", "ingredients": "Cherry tomato, peppers, mozzarella, garden veg", "tags": ["Vegetarian", "Gluten", "Dairy"], "image": "veggie-supreme.webp" },
+    { "name": "Mushroom & Ham", "ingredients": "Mushrooms, ham, mozzarella", "tags": ["Gluten", "Dairy"], "image": "mushroom-ham.webp" },
+    { "name": "Mediterranean", "ingredients": "Green olives, green pepper, mozzarella, basil", "tags": ["Vegetarian", "Gluten", "Dairy"], "image": "mediterranean.webp" },
+    { "name": "Hawaiian", "ingredients": "Ham, pineapple, mozzarella", "tags": ["Gluten", "Dairy"], "image": "hawaiian.webp" },
+    { "name": "Greek Supreme", "ingredients": "Black olives, peppers, tomato, feta", "tags": ["Vegetarian", "Gluten", "Dairy"], "image": "greek-supreme.webp" },
+    { "name": "Ham & Onion", "ingredients": "Caramelised onion, ham, mozzarella, white base", "tags": ["Gluten", "Dairy"], "image": "ham-onion.webp" },
+    { "name": "Italian Supreme", "ingredients": "Black olives, salami, tomato, mozzarella", "tags": ["Gluten", "Dairy"], "image": "italian-supreme.webp" }
+  ]
+}

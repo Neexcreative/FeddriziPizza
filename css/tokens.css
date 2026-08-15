@@ -1,0 +1,24 @@
+/* GERADO AUTOMATICAMENTE por "npm run build" a partir de config/pizzeria.json (campo brand.color).
+   Nao edite este arquivo direto: suas mudancas serao substituidas no proximo build.
+   Para mudar as cores da marca, edite config/pizzeria.json e rode "npm run build" de novo. */
+:root{
+  /* neutros do tema escuro (fixos, nao dependem da marca) */
+  --bg:      #1e1e1e;
+  --bg-2:    #161514;
+  --panel:   oklch(0.22 0.012 55);
+  --panel-2: oklch(0.18 0.012 55);
+  --border:  oklch(0.42 0.02 55 / .45);
+  --text:    oklch(0.96 0.008 85);
+  --muted:   oklch(0.66 0.02 60);
+
+  /* vermelho de erro em formularios (fixo, independente da marca) */
+  --error:      oklch(0.67 0.20 25);
+  --error-text: oklch(0.76 0.15 28);
+
+  /* cor da marca (derivada de config.brand.color = "#e5462c") */
+  --accent:        oklch(0.619 0.200 31.9);
+  --accent-hi:     oklch(0.699 0.190 39.9);
+  --ember:         oklch(0.759 0.160 59.9);
+  --cta-grad-from: oklch(0.649 0.210 34.4);
+  --cta-grad-to:   oklch(0.549 0.200 27.4);
+}
