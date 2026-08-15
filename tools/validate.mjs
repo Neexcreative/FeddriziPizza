@@ -1,6 +1,10 @@
 import { readFile } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { readPizzeriaConfig } from './lib/config.mjs';
+
+const config = await readPizzeriaConfig();
+const expectedTitle = `<title>${config.brand.name} | Artisan Pizza &amp; Online Ordering</title>`;
 
 const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const errors = [];
@@ -11,13 +15,14 @@ const required = [
   'id="main"',
   'id="checkoutForm"',
   'aria-live="polite"',
-  '<title>Fedrizzi Pizza | Artisan Pizza &amp; Online Ordering</title>',
+  expectedTitle,
   'name="robots"',
   'property="og:title"',
   'property="og:url"',
   'name="twitter:card"',
   'href="assets/icons/favicon.svg"',
   'href="site.webmanifest"',
+  'href="css/tokens.css"',
   'href="css/main.css"',
   'href="css/responsive.css"',
   'type="module" src="js/app.js"'
@@ -30,13 +35,16 @@ for (const marker of required) {
 if (/<style>|<script>([\s\S]*?)<\/script>/.test(html)) {
   errors.push('Unexpected inline CSS or application JavaScript found in index.html.');
 }
+if (/\sstyle\s*=\s*["']/.test(html)) {
+  errors.push('Inline style="..." attribute found in index.html.');
+}
 
 if (/href\s*=\s*["']#["']/i.test(html)) errors.push('Dead href="#" navigation remains in index.html.');
 if (/href\s*=\s*["']\s*["']/i.test(html)) errors.push('Empty href navigation remains in index.html.');
 if (/javascript\s*:\s*void\s*\(\s*0\s*\)/i.test(html)) errors.push('javascript:void(0) navigation remains in index.html.');
 
 if ((html.match(/<h1\b/g) || []).length !== 1) errors.push('The document must contain exactly one H1.');
-if (!/<img id="pizzaWheel"[^>]*src="assets\/images\/pizzas\/FULL_PIZZA\.webp"[^>]*alt=""[^>]*aria-hidden="true"/.test(html)) {
+if (!/<img id="pizza-wheel"[^>]*src="assets\/images\/pizzas\/FULL_PIZZA\.webp"[^>]*alt=""[^>]*aria-hidden="true"/.test(html)) {
   errors.push('The master pizza image must remain decorative and use FULL_PIZZA.webp.');
 }
 if (/<svg id="pizzaSvg"|wedgeClip|class="slice"/.test(html)) {
@@ -52,14 +60,19 @@ for (const module of modules) {
   if (result.status !== 0) errors.push(`JavaScript syntax error in js/${module}: ${result.stderr.trim()}`);
 }
 
-for (const stylesheet of ['main.css', 'responsive.css']) {
+for (const stylesheet of ['tokens.css', 'main.css', 'responsive.css']) {
   try { await readFile(new URL(`../css/${stylesheet}`, import.meta.url), 'utf8'); }
   catch { errors.push(`Missing stylesheet: css/${stylesheet}`); }
 }
 
-for (const asset of ['../assets/icons/favicon.svg', '../site.webmanifest', '../config/metadata.json']) {
+for (const asset of ['../assets/icons/favicon.svg', '../site.webmanifest', '../config/pizzeria.json']) {
   try { await readFile(new URL(asset, import.meta.url), 'utf8'); }
-  catch { errors.push(`Missing SEO asset: ${asset.replace('../', '')}`); }
+  catch { errors.push(`Missing required asset: ${asset.replace('../', '')}`); }
+}
+
+for (const flavor of config.flavors) {
+  try { await readFile(new URL(`../assets/images/pizzas/${flavor.image}`, import.meta.url)); }
+  catch { errors.push(`Missing flavor image for "${flavor.name}": assets/images/pizzas/${flavor.image}`); }
 }
 
 try { JSON.parse(await readFile(new URL('../site.webmanifest', import.meta.url), 'utf8')); }
@@ -67,6 +80,7 @@ catch { errors.push('site.webmanifest is not valid JSON.'); }
 
 if (errors.length) {
   console.error(errors.join('\n'));
+  console.error('\nDica: se voce editou config/pizzeria.json, rode "npm run build" antes de "npm run check".');
   process.exit(1);
 }
 
