@@ -44,10 +44,14 @@ if (/href\s*=\s*["']\s*["']/i.test(html)) errors.push('Empty href navigation rem
 if (/javascript\s*:\s*void\s*\(\s*0\s*\)/i.test(html)) errors.push('javascript:void(0) navigation remains in index.html.');
 
 if ((html.match(/<h1\b/g) || []).length !== 1) errors.push('The document must contain exactly one H1.');
-if (!/<img id="pizza-wheel"[^>]*src="assets\/images\/pizzas\/FULL_PIZZA\.webp"[^>]*alt=""[^>]*aria-hidden="true"/.test(html)) {
-  errors.push('The master pizza image must remain decorative and use FULL_PIZZA.webp.');
+if (!/<div id="pizza-wheel"[^>]*aria-hidden="true"/.test(html)) {
+  errors.push('The pizza wheel container must remain decorative (aria-hidden) with id="pizza-wheel".');
 }
-if (/<svg id="pizzaSvg"|wedgeClip|class="slice"/.test(html)) {
+const pizzaWheelJs = await readFile(new URL('../js/pizza-wheel.js', import.meta.url), 'utf8');
+if (!pizzaWheelJs.includes("assets/images/pizzas/FULL_PIZZA.webp")) {
+  errors.push('js/pizza-wheel.js must build the wheel wedges from FULL_PIZZA.webp.');
+}
+if (/<svg id="pizzaSvg"|wedgeClip/.test(html)) {
   errors.push('Legacy multi-slice pizza rendering remains in index.html.');
 }
 

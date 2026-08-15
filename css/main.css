@@ -114,10 +114,16 @@
   .pizza-wrap{position:fixed;left:50%;bottom:calc(-1 * var(--size) * 0.54);
     transform:translateX(-50%);width:var(--size);height:var(--size);z-index:8;
     --size:min(1100px,155vw);pointer-events:auto;touch-action:pan-y}
-  #pizza-wheel{display:block;width:100%;height:100%;object-fit:contain;transform-origin:50% 50%;user-select:none;
+  #pizza-wheel{display:block;position:relative;width:100%;height:100%;transform-origin:50% 50%;user-select:none;
     filter:drop-shadow(0 10px 40px oklch(0.05 0.01 40 / .6))}
   .no-gsap #pizza-wheel{transition:transform .62s cubic-bezier(.16,1,.3,1)}
   .no-gsap.dragging #pizza-wheel{transition:none}
+
+  /* each wedge shows the SAME full pizza image, clipped to its own 45deg slice -
+     lets one slice hover/lift independently without needing 8 separate photos */
+  .wedge{position:absolute;inset:0;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+  .wedge img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none}
+  .wedge:hover{transform:translate(var(--wedge-dx),var(--wedge-dy)) scale(1.045);z-index:5}
 
   .hint{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:20;
     font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);
