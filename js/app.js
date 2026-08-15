@@ -102,6 +102,7 @@ function initialize(){
   });
   document.querySelectorAll('[data-nav-action="delivery"]').forEach(button=>button.addEventListener('click',information.openDelivery));
   document.querySelectorAll('[data-nav-action="faq"]').forEach(button=>button.addEventListener('click',information.openFaq));
+  document.querySelectorAll('[data-nav-action="full-menu"]').forEach(button=>button.addEventListener('click',information.openFullMenu));
   document.querySelectorAll('[data-social]').forEach(button=>{
     const url=SOCIAL_LINKS[button.dataset.social];
     if(url){

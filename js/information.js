@@ -1,4 +1,4 @@
-import {DELIVERY_CONFIG,calculateDeliveryFee} from './site-config.js';
+import {DELIVERY_CONFIG,calculateDeliveryFee,FLAVORS,EXTRAS} from './site-config.js';
 
 const money=value=>`€${value.toFixed(2)}`;
 
@@ -17,8 +17,23 @@ const faqs=[
 
 export function initInformationPanels({modal}){
   const deliveryContent=document.getElementById('deliveryInfoContent');
+  const fullMenuContent=document.getElementById('fullMenuContent');
   const faqList=document.getElementById('faqList');
   const examples=[5,10,12,15];
+
+  fullMenuContent.innerHTML=`
+    <section class="info-section"><h3>Flavours</h3><div class="menu-flavors">${FLAVORS.map(flavor=>`
+      <div class="menu-flavor">
+        <h4>${flavor.name} ${flavor.tags.map(tag=>`<span class="tag ${tag==='Vegetarian'?'v':''}">${tag}</span>`).join('')}</h4>
+        <p>${flavor.ing}</p>
+      </div>`).join('')}</div>
+    </section>
+    <section class="info-section"><h3>Extras</h3>${Object.entries(EXTRAS).map(([category,items])=>`
+      <div class="menu-extra-group">
+        <h4>${category}</h4>
+        <div class="side-list">${items.map(item=>`<div class="sr"><span>${item.name}</span><span>${money(item.price)}</span></div>`).join('')}</div>
+      </div>`).join('')}
+    </section>`;
 
   deliveryContent.innerHTML=`
     <div class="info-grid">
@@ -52,6 +67,7 @@ export function initInformationPanels({modal}){
 
   return {
     openDelivery(){modal.open(document.getElementById('deliveryInfoModal'))},
-    openFaq(){modal.open(document.getElementById('faqModal'))}
+    openFaq(){modal.open(document.getElementById('faqModal'))},
+    openFullMenu(){modal.open(document.getElementById('fullMenuModal'))}
   };
 }

@@ -109,6 +109,8 @@ export const SIZES = ${JSON.stringify(
     2
   )};
 
+export const EXTRAS = Object.freeze(${JSON.stringify(config.extras, null, 2)});
+
 export const SOCIAL_LINKS = Object.freeze(${JSON.stringify(config.social, null, 2)});
 
 export const DELIVERY_CONFIG = Object.freeze(${JSON.stringify(config.delivery, null, 2)});

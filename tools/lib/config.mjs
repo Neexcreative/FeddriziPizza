@@ -11,6 +11,14 @@ export async function readPizzeriaConfig() {
   if (!config.brand?.color) errors.push('brand.color is required (e.g. "#e5462c")');
   if (!Array.isArray(config.flavors) || config.flavors.length < 1) errors.push('flavors must be a non-empty array');
   if (!Array.isArray(config.sizes) || config.sizes.length < 1) errors.push('sizes must be a non-empty array');
+  if (!config.extras || typeof config.extras !== 'object') errors.push('extras must be an object (e.g. { "Drinks": [...] })');
+  Object.entries(config.extras ?? {}).forEach(([category, items]) => {
+    if (!Array.isArray(items)) { errors.push(`extras.${category} must be an array`); return; }
+    items.forEach((item, index) => {
+      if (!item.name) errors.push(`extras.${category}[${index}].name is required`);
+      if (typeof item.price !== 'number') errors.push(`extras.${category}[${index}].price must be a number`);
+    });
+  });
   config.flavors?.forEach((flavor, index) => {
     if (!flavor.name) errors.push(`flavors[${index}].name is required`);
     if (!flavor.ingredients) errors.push(`flavors[${index}].ingredients is required`);

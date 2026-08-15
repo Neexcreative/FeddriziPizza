@@ -1,10 +1,6 @@
-const CART_KEY='forno-cart-v1';
+import {EXTRAS as sides} from './site-config.js';
 
-const sides={
-  Drinks:[['Coca-Cola 330ml',3],['Sparkling Water',2.5],['Peroni 330ml',5]],
-  Dips:[['Garlic & Herb',1.5],['Spicy Nduja',2],['Blue Cheese',1.5]],
-  Fries:[['Rosemary Fries',4.5],['Truffle Fries',6],['Loaded Fries',7]]
-};
+const CART_KEY='forno-cart-v1';
 
 export const formatMoney=value=>`€${value.toFixed(2)}`;
 
@@ -92,7 +88,7 @@ export function createCart({pizzaWheel,modal,burst=()=>{}}){
   document.querySelectorAll('[data-cat]').forEach(button=>button.onclick=()=>{
     const category=button.dataset.cat;
     document.getElementById('sidesTitle').textContent=category;
-    document.getElementById('sidesList').innerHTML=sides[category].map(([name,price])=>`<div class="sr"><span>${name} <span style="opacity:.6">· ${formatMoney(price)}</span></span><button type="button" data-add="${name}|${price}">+</button></div>`).join('');
+    document.getElementById('sidesList').innerHTML=sides[category].map(({name,price})=>`<div class="sr"><span>${name} <span style="opacity:.6">· ${formatMoney(price)}</span></span><button type="button" data-add="${name}|${price}">+</button></div>`).join('');
     modal.open(document.getElementById('sidesModal'));
   });
 

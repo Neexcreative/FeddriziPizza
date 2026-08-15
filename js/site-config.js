@@ -90,6 +90,51 @@ export const SIZES = [
   }
 ];
 
+export const EXTRAS = Object.freeze({
+  "Drinks": [
+    {
+      "name": "Coca-Cola 330ml",
+      "price": 3
+    },
+    {
+      "name": "Sparkling Water",
+      "price": 2.5
+    },
+    {
+      "name": "Peroni 330ml",
+      "price": 5
+    }
+  ],
+  "Dips": [
+    {
+      "name": "Garlic & Herb",
+      "price": 1.5
+    },
+    {
+      "name": "Spicy Nduja",
+      "price": 2
+    },
+    {
+      "name": "Blue Cheese",
+      "price": 1.5
+    }
+  ],
+  "Fries": [
+    {
+      "name": "Rosemary Fries",
+      "price": 4.5
+    },
+    {
+      "name": "Truffle Fries",
+      "price": 6
+    },
+    {
+      "name": "Loaded Fries",
+      "price": 7
+    }
+  ]
+});
+
 export const SOCIAL_LINKS = Object.freeze({
   "instagram": null,
   "facebook": null,
