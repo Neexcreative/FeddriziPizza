@@ -24,15 +24,16 @@ export function initInformationPanels({modal}){
   fullMenuContent.innerHTML=`
     <section class="info-section"><h3>Flavours</h3><div class="menu-flavors">${FLAVORS.map(flavor=>`
       <div class="menu-flavor">
-        <h4>${flavor.name} ${flavor.tags.map(tag=>`<span class="tag ${tag==='Vegetarian'?'v':''}">${tag}</span>`).join('')}</h4>
+        <h4>${flavor.name}</h4>
         <p>${flavor.ing}</p>
+        <div class="menu-flavor-tags">${flavor.tags.map(tag=>`<span class="tag ${tag==='Vegetarian'?'v':''}">${tag}</span>`).join('')}</div>
       </div>`).join('')}</div>
     </section>
-    <section class="info-section"><h3>Extras</h3>${Object.entries(EXTRAS).map(([category,items])=>`
+    <section class="info-section"><h3>Extras</h3><div class="menu-extras-grid">${Object.entries(EXTRAS).map(([category,items])=>`
       <div class="menu-extra-group">
         <h4>${category}</h4>
         <div class="side-list">${items.map(item=>`<div class="sr"><span>${item.name}</span><span>${money(item.price)}</span></div>`).join('')}</div>
-      </div>`).join('')}
+      </div>`).join('')}</div>
     </section>`;
 
   deliveryContent.innerHTML=`

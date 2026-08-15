@@ -233,15 +233,21 @@
   .delivery-examples{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .delivery-examples div{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border:1px solid var(--border);border-radius:11px}
   .delivery-examples span{color:var(--accent-hi);font-size:11px;font-weight:600}.delivery-examples strong{font-size:11px}
-  .menu-flavors{display:grid;gap:8px}
-  .menu-flavor{border:1px solid var(--border);border-radius:12px;padding:11px 14px}
-  .menu-flavor h4{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--text);
-    font-family:'Bodoni Moda',serif;font-weight:500;font-size:15px}
-  .menu-flavor p{margin-top:4px;color:var(--muted);font-size:12.5px;line-height:1.5}
-  .menu-extra-group{margin-top:12px}
-  .menu-extra-group:first-of-type{margin-top:0}
-  .menu-extra-group h4{margin-bottom:8px;color:var(--muted);font-size:10px;letter-spacing:.16em;text-transform:uppercase}
-  .menu-extra-group .side-list .sr{font-size:12.5px}
+  .menu-modal{width:min(980px,94vw);padding:24px}
+  .menu-modal .sub{margin-bottom:14px}
+  .menu-modal .info-section{margin-top:10px;padding:14px}
+  .menu-flavors{display:grid;grid-template-columns:1fr;gap:8px}
+  @media (min-width:640px){.menu-flavors{grid-template-columns:1fr 1fr}}
+  .menu-flavor{border:1px solid var(--border);border-radius:12px;padding:10px 13px}
+  .menu-flavor h4{color:var(--text);font-family:'Bodoni Moda',serif;font-weight:600;font-size:15px}
+  .menu-flavor p{margin-top:3px;color:var(--muted);font-size:12px;line-height:1.45;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .menu-flavor-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+  .menu-extras-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  @media (max-width:640px){.menu-extras-grid{grid-template-columns:1fr}}
+  .menu-extra-group h4{margin-bottom:6px;color:var(--muted);font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+  .menu-extra-group .side-list{gap:5px}
+  .menu-extra-group .side-list .sr{font-size:12px;padding:7px 10px}
   .info-note{margin-top:12px}.info-section ul{padding-left:18px;display:grid;gap:5px}
   .allergy-note{border-color:color-mix(in oklch, var(--accent) 45%, transparent)}
   .faq-list{display:grid;gap:8px}
